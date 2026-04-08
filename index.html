@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>치킨 창업 해석기 | 숫자를 넘어선 진짜 이야기</title>
+    <meta name="description" content="단순한 치킨 브랜드 비교가 아닙니다. 사장님의 상황에 맞춰 창업 비용과 수익을 쉽고 친밀하게 풀어드리는 창업 해석기입니다.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <h1 id="logo" class="logo">치킨 <span class="highlight">해석기</span></h1>
+                <p class="tagline">숫자를 보여주는 게 아니라, 그 숫자가 실제로 어떤 뜻인지 풀어드립니다.</p>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <!-- Screen 1: Brand Selection -->
+            <section id="brand-selection" class="screen">
+                <div class="section-title">
+                    <h2>안녕하세요, <span class="name">예비 사장님!</span><br>어떤 닭을 튀겨볼까 고민 중이신가요?</h2>
+                    <p>궁금한 브랜드를 선택하면 상세한 해석을 도와드릴게요.</p>
+                </div>
+                <div id="brand-list" class="brand-grid">
+                    <!-- Dynamic Brand Cards -->
+                </div>
+            </section>
+
+            <!-- Screen 2: Condition Setup -->
+            <section id="condition-setup" class="screen hidden">
+                <div class="back-btn" id="to-brands">
+                    <i data-lucide="chevron-left"></i> 브랜드 다시 고르기
+                </div>
+                <div class="section-title">
+                    <h2 id="setup-title">반가워요! <br>사장님의 상황을 조금만 알려주시겠어요?</h2>
+                    <p>상황에 따라 같은 브랜드라도 해석이 달라질 수 있거든요.</p>
+                </div>
+                
+                <div class="condition-forms">
+                    <div class="form-group">
+                        <label>현재 준비된 자본금은?</label>
+                        <div class="toggle-group" data-condition="capital">
+                            <button class="active" data-value="low">7천 미만</button>
+                            <button data-value="medium">8천 ~ 1.5억</button>
+                            <button data-value="high">2억 이상</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>예상하시는 매장 입지는?</label>
+                        <div class="toggle-group" data-condition="location">
+                            <button data-value="normal">보통 (골목/배달)</button>
+                            <button class="active" data-value="good">좋음 (역세권/번화가)</button>
+                            <button data-value="premium">최고 (대형상권/랜드마크)</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>어떻게 운영하실 계획인가요?</label>
+                        <div class="toggle-group" data-condition="labor">
+                            <button data-value="solo">거의 혼자서</button>
+                            <button class="active" data-value="staff1">직원 1명</button>
+                            <button data-value="staff2">직원 2명 이상</button>
+                        </div>
+                    </div>
+
+                    <button id="start-analysis" class="btn-primary">해석 시작하기</button>
+                </div>
+            </section>
+
+            <!-- Screen 3: Interpretation -->
+            <section id="analysis-screen" class="screen hidden">
+                <div class="back-btn" id="to-setup">
+                    <i data-lucide="chevron-left"></i> 조건 수정하기
+                </div>
+
+                <div id="brand-summary-card" class="summary-card">
+                    <!-- Dynamic Summary -->
+                </div>
+
+                <div class="question-nav">
+                    <h3>가장 궁금한 질문을 눌러보세요</h3>
+                    <div class="q-grid">
+                        <button class="q-btn" data-q="isItWorthIt">이 브랜드, 정말 해볼 만할까?</button>
+                        <button class="q-btn" data-q="initialCost">처음 시작할 때 돈이 얼마나 들까?</button>
+                        <button class="q-btn" data-q="monthlyProfit">한 달 운영하면 실제로 얼마 남을까?</button>
+                        <button class="q-btn" data-q="risks">돈이 부족하면 어디서 위험해질까?</button>
+                    </div>
+                </div>
+
+                <div id="answer-container" class="answer-section">
+                    <!-- Dynamic Answers appear here -->
+                </div>
+
+                <footer class="bottom-cta">
+                    <p>다른 브랜드는 어떤지 궁금하신가요?</p>
+                    <button id="restart" class="btn-secondary">다른 브랜드 보러가기</button>
+                </footer>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals or Overlays if needed -->
+    <div id="loader" class="loader-overlay hidden">
+        <div class="spinner"></div>
+        <p>꼼꼼하게 해석 중입니다...</p>
+    </div>
+
+    <script type="module" src="main.js"></script>
+    <script>
+        // Init Lucide after DOM Load (if not using modules for this)
+        window.addEventListener('load', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

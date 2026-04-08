@@ -1,0 +1,16 @@
+{
+  "name": "chicken-analysis-mvp",
+  "version": "1.0.0",
+  "description": "치킨 창업 해석기 MVP",
+  "main": "main.js",
+  "scripts": {
+    "dev": "npx http-server -p 8888",
+    "start": "npx http-server -p 8888"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

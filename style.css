@@ -1,0 +1,330 @@
+:root {
+    --primary: #f97316; /* Warm Orange for energy/food */
+    --primary-dark: #ea580c;
+    --navy: #1e293b;
+    --text-main: #334155;
+    --text-muted: #64748b;
+    --bg-light: #fdfdfd;
+    --bg-accent: #f8fafc;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-family: 'Outfit', 'Pretendard', sans-serif;
+    color: var(--navy);
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Layout */
+.content-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.main-header {
+    background-color: var(--white);
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Screens */
+.screen {
+    padding: 40px 0;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+    margin-bottom: 32px;
+}
+
+.section-title h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.section-title p {
+    color: var(--text-muted);
+}
+
+/* Brand Grid */
+.brand-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.brand-card {
+    background: var(--white);
+    border: 1px solid #f1f5f9;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary);
+}
+
+.brand-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+}
+
+.brand-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.brand-link {
+    color: var(--primary);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Forms & Toggles */
+.form-group {
+    margin-bottom: 32px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.toggle-group {
+    display: flex;
+    gap: 8px;
+    background: var(--bg-accent);
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.toggle-group button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-muted);
+}
+
+.toggle-group button.active {
+    background: var(--white);
+    color: var(--primary);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 18px;
+    background-color: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0f172a;
+    transform: scale(1.02);
+}
+
+/* Back Button */
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+/* Summary Card */
+.summary-card {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    padding: 32px;
+    margin-bottom: 40px;
+}
+
+.summary-card h2 { color: var(--white); font-size: 1.1rem; opacity: 0.8; margin-bottom: 8px; }
+.summary-card p { font-size: 1.2rem; font-weight: 600; line-height: 1.5; }
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.metric-item {
+    background: rgba(255,255,255,0.05);
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.label { font-size: 0.75rem; opacity: 0.6; display: block; margin-bottom: 4px; }
+.val { font-size: 1rem; font-weight: 600; }
+
+/* Question Nav */
+.question-nav h3 {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.q-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.q-btn {
+    text-align: left;
+    padding: 16px 20px;
+    background: var(--white);
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.q-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    padding-left: 24px;
+}
+
+/* Answer Section */
+.answer-card {
+    background: #fff;
+    border-left: 4px solid var(--primary);
+    padding: 24px;
+    border-radius: 0 16px 16px 0;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.answer-card h4 {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.badge.info { background: #e0f2fe; color: #0369a1; }
+.badge.risk { background: #fee2e2; color: #b91c1c; }
+.badge.warning { background: #fef3c7; color: #92400e; }
+
+/* Footer */
+.bottom-cta {
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 40px;
+    margin-top: 40px;
+}
+
+.btn-secondary {
+    margin-top: 12px;
+    padding: 12px 24px;
+    border: 1px solid var(--navy);
+    background: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.btn-secondary:hover {
+    background: var(--navy);
+    color: var(--white);
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .content-wrapper { padding: 16px; }
+    .brand-card { padding: 20px; }
+}
