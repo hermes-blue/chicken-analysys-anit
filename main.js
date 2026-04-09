@@ -8,7 +8,8 @@ let state = {
         capital: 'low',
         location: 'good',
         labor: 'staff1'
-    }
+    },
+    currentBrandIndex: 0
 };
 
 // --- DOM Elements ---
@@ -18,31 +19,41 @@ const screens = {
     analysis: document.getElementById('analysis-screen')
 };
 
-const brandList = document.getElementById('brand-list');
+const brandHeroSelector = document.getElementById('brand-hero-selector');
 const answerContainer = document.getElementById('answer-container');
 const summaryCard = document.getElementById('brand-summary-card');
 
 // --- Initialization ---
 function init() {
-    renderBrandList();
+    renderBrandHero();
     setupEventListeners();
 }
 
 // --- Renderers ---
-function renderBrandList() {
-    brandList.innerHTML = brands.map(brand => `
-        <div class="brand-card" data-id="${brand.id}">
-            <div class="brand-info">
-                <h3>${brand.name}</h3>
-                <p>${brand.tagline}</p>
+function renderBrandHero() {
+    const brand = brands[state.currentBrandIndex];
+    brandHeroSelector.innerHTML = `
+        <div class="brand-hero-display">
+            <div class="nav-btn prev">
+                <i data-lucide="chevron-left"></i>
             </div>
-            <div class="brand-link">
-                상세 보기 <i data-lucide="chevron-right"></i>
+            
+            <div class="brand-hero-card" data-id="${brand.id}">
+                <div class="brand-info">
+                    <h3>${brand.name}</h3>
+                    <p>${brand.tagline}</p>
+                </div>
+                <div class="start-hint">
+                    상세 정보 보러가기 <i data-lucide="arrow-right"></i>
+                </div>
+            </div>
+
+            <div class="nav-btn next">
+                <i data-lucide="chevron-right"></i>
             </div>
         </div>
-    `).join('');
+    `;
     
-    // Explicitly tell lucide to icons since we just added them
     if (window.lucide) window.lucide.createIcons();
 }
 
@@ -125,11 +136,20 @@ function renderAnswer(qKey) {
 
 // --- Event Handlers ---
 function setupEventListeners() {
-    // Brand Card Clicks
-    brandList.addEventListener('click', (e) => {
-        const card = e.target.closest('.brand-card');
-        if (card) {
-            const id = card.dataset.id;
+    // Brand Hero Clicks & Nav
+    brandHeroSelector.addEventListener('click', (e) => {
+        const prevBtn = e.target.closest('.prev');
+        const nextBtn = e.target.closest('.next');
+        const heroCard = e.target.closest('.brand-hero-card');
+
+        if (prevBtn) {
+            state.currentBrandIndex = (state.currentBrandIndex - 1 + brands.length) % brands.length;
+            renderBrandHero();
+        } else if (nextBtn) {
+            state.currentBrandIndex = (state.currentBrandIndex + 1) % brands.length;
+            renderBrandHero();
+        } else if (heroCard) {
+            const id = heroCard.dataset.id;
             state.selectedBrand = brands.find(b => b.id === id);
             showScreen('setup');
         }

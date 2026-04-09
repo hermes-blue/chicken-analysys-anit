@@ -92,48 +92,95 @@ h1, h2, h3 {
     color: var(--text-muted);
 }
 
-/* Brand Grid */
-.brand-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+/* Hero Selector Container */
+.brand-hero-container {
+    padding: 20px 0;
+    position: relative;
+    max-width: 100%;
 }
 
-.brand-card {
+.brand-hero-display {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+}
+
+.brand-hero-card {
+    flex: 1;
     background: var(--white);
     border: 1px solid #f1f5f9;
-    border-radius: var(--border-radius);
-    padding: 24px;
+    border-radius: 24px;
+    padding: 40px 24px;
+    text-align: center;
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 450px;
+    position: relative;
+    overflow: hidden;
 }
 
-.brand-card:hover {
-    transform: translateY(-4px);
+.brand-hero-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary), #fb923c);
+}
+
+.brand-hero-card:hover {
+    transform: translateY(-8px) scale(1.01);
     box-shadow: var(--shadow-hover);
     border-color: var(--primary);
 }
 
 .brand-info h3 {
-    font-size: 1.25rem;
-    margin-bottom: 4px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
 }
 
 .brand-info p {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
+    margin-bottom: 24px;
 }
 
-.brand-link {
+.nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+}
+
+.nav-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+.start-hint {
+    margin-top: 20px;
+    font-size: 0.9rem;
     color: var(--primary);
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 6px;
 }
 
 /* Forms & Toggles */
