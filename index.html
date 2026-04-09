@@ -86,17 +86,28 @@
                     <i data-lucide="chevron-left"></i> 조건 수정하기
                 </div>
 
-                <div id="brand-summary-card" class="summary-card">
-                    <!-- Dynamic Summary -->
+                <div id="analysis-brand-header" class="brand-analysis-header">
+                    <!-- Brand name and tagline will be rendered here -->
                 </div>
 
                 <div class="question-nav">
-                    <h3>가장 궁금한 질문을 눌러보세요</h3>
                     <div class="q-grid">
-                        <button class="q-btn" data-q="isItWorthIt">이 브랜드, 정말 해볼 만할까?</button>
-                        <button class="q-btn" data-q="initialCost">처음 시작할 때 돈이 얼마나 들까?</button>
-                        <button class="q-btn" data-q="monthlyProfit">한 달 운영하면 실제로 얼마 남을까?</button>
-                        <button class="q-btn" data-q="risks">돈이 부족하면 어디서 위험해질까?</button>
+                        <button class="q-btn-card" data-q="isItWorthIt">
+                            <div class="q-icon"><i data-lucide="help-circle"></i></div>
+                            <span>정말 해볼 만할까?</span>
+                        </button>
+                        <button class="q-btn-card" data-q="initialCost">
+                            <div class="q-icon"><i data-lucide="piggy-bank"></i></div>
+                            <span>시작할 때 돈이 <br>얼마나 들까?</span>
+                        </button>
+                        <button class="q-btn-card" data-q="monthlyProfit">
+                            <div class="q-icon"><i data-lucide="trending-up"></i></div>
+                            <span>한 달 운영하면 <br>얼마나 남을까?</span>
+                        </button>
+                        <button class="q-btn-card" data-q="risks">
+                            <div class="q-icon"><i data-lucide="alert-triangle"></i></div>
+                            <span>돈이 부족하면 <br>어디서 위험해질까?</span>
+                        </button>
                     </div>
                 </div>
 
@@ -118,7 +129,7 @@
         <p>꼼꼼하게 해석 중입니다...</p>
     </div>
 
-    <script type="module" src="main.js"></script>
+    <script type="module" src="main.js?v=1.1"></script>
     <script>
         // Init Lucide after DOM Load (if not using modules for this)
         window.addEventListener('load', () => {

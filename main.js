@@ -12,25 +12,20 @@ let state = {
     currentBrandIndex: 0
 };
 
-// --- DOM Elements ---
-const screens = {
-    brands: document.getElementById('brand-selection'),
-    setup: document.getElementById('condition-setup'),
-    analysis: document.getElementById('analysis-screen')
-};
-
-const brandHeroSelector = document.getElementById('brand-hero-selector');
-const answerContainer = document.getElementById('answer-container');
-const summaryCard = document.getElementById('brand-summary-card');
+// DOM Elements will be retrieved dynamically inside functions for maximum reliability
 
 // --- Initialization ---
 function init() {
+    console.log("App Initialized");
     renderBrandHero();
     setupEventListeners();
 }
 
 // --- Renderers ---
 function renderBrandHero() {
+    const brandHeroSelector = document.getElementById('brand-hero-selector');
+    if (!brandHeroSelector) return;
+
     const brand = brands[state.currentBrandIndex];
     brandHeroSelector.innerHTML = `
         <div class="brand-hero-display">
@@ -58,44 +53,48 @@ function renderBrandHero() {
 }
 
 function showScreen(screenId) {
-    Object.values(screens).forEach(s => s.classList.add('hidden'));
-    screens[screenId].classList.remove('hidden');
+    console.log("Switching to screen:", screenId);
+    const screenElements = {
+        brands: document.getElementById('brand-selection'),
+        setup: document.getElementById('condition-setup'),
+        analysis: document.getElementById('analysis-screen')
+    };
+
+    Object.values(screenElements).forEach(s => {
+        if (s) s.classList.add('hidden');
+    });
+
+    const target = screenElements[screenId];
+    if (target) {
+        target.classList.remove('hidden');
+    } else {
+        console.error("Target screen not found:", screenId);
+    }
     window.scrollTo(0, 0);
 }
 
 function renderAnalysis() {
     const brand = state.selectedBrand;
-    const { advice, alerts } = getInterpretation(brand, state.conditions);
+    const analysisBrandHeader = document.getElementById('analysis-brand-header');
+    const answerContainer = document.getElementById('answer-container');
+    
+    if (!analysisBrandHeader || !answerContainer) return;
 
-    // Render Summary
-    summaryCard.innerHTML = `
-        <h2>${brand.name} 한눈에 보기</h2>
-        <p>"${brand.summary}"</p>
-        <div class="metric-grid">
-            <div class="metric-item">
-                <span class="label">초보자 친화도</span>
-                <span class="val">${brand.metrics.friendliness}</span>
-            </div>
-            <div class="metric-item">
-                <span class="label">초기 투자금</span>
-                <span class="val">${formatCurrency(brand.costs.totalStartup)}</span>
-            </div>
-            <div class="metric-item">
-                <span class="label">매달 매출</span>
-                <span class="val">약 ${formatCurrency(brand.monthly.sales)}</span>
-            </div>
-            <div class="metric-item">
-                <span class="label">수익성 수준</span>
-                <span class="val">${brand.metrics.profitability}</span>
-            </div>
-        </div>
+    // Render Header Only
+    analysisBrandHeader.innerHTML = `
+        <h2 class="analysis-title">${brand.name} 창업 해석</h2>
+        <p class="analysis-tagline">"${brand.summary}"</p>
     `;
 
-    answerContainer.innerHTML = '<p class="text-muted">위의 질문 중 궁금한 것을 클릭해 보세요!</p>';
+    answerContainer.innerHTML = '<p class="text-muted" style="text-align: center; margin-top: 20px;">위의 카드 중 궁금한 해석 내용을 클릭해 보세요!</p>';
 }
 
 function renderAnswer(qKey) {
     const brand = state.selectedBrand;
+    const answerContainer = document.getElementById('answer-container');
+    
+    if (!answerContainer) return;
+
     const { advice, alerts } = getInterpretation(brand, state.conditions);
     
     let html = `
@@ -136,24 +135,26 @@ function renderAnswer(qKey) {
 
 // --- Event Handlers ---
 function setupEventListeners() {
-    // Brand Hero Clicks & Nav
-    brandHeroSelector.addEventListener('click', (e) => {
-        const prevBtn = e.target.closest('.prev');
-        const nextBtn = e.target.closest('.next');
-        const heroCard = e.target.closest('.brand-hero-card');
+    const brandHeroSelector = document.getElementById('brand-hero-selector');
+    if (brandHeroSelector) {
+        brandHeroSelector.addEventListener('click', (e) => {
+            const prevBtn = e.target.closest('.prev');
+            const nextBtn = e.target.closest('.next');
+            const heroCard = e.target.closest('.brand-hero-card');
 
-        if (prevBtn) {
-            state.currentBrandIndex = (state.currentBrandIndex - 1 + brands.length) % brands.length;
-            renderBrandHero();
-        } else if (nextBtn) {
-            state.currentBrandIndex = (state.currentBrandIndex + 1) % brands.length;
-            renderBrandHero();
-        } else if (heroCard) {
-            const id = heroCard.dataset.id;
-            state.selectedBrand = brands.find(b => b.id === id);
-            showScreen('setup');
-        }
-    });
+            if (prevBtn) {
+                state.currentBrandIndex = (state.currentBrandIndex - 1 + brands.length) % brands.length;
+                renderBrandHero();
+            } else if (nextBtn) {
+                state.currentBrandIndex = (state.currentBrandIndex + 1) % brands.length;
+                renderBrandHero();
+            } else if (heroCard) {
+                const id = heroCard.dataset.id;
+                state.selectedBrand = brands.find(b => b.id === id);
+                showScreen('setup');
+            }
+        });
+    }
 
     // Condition Toggles
     document.querySelectorAll('.toggle-group button').forEach(btn => {
@@ -172,32 +173,47 @@ function setupEventListeners() {
     });
 
     // Start Analysis Btn
-    document.getElementById('start-analysis').addEventListener('click', () => {
-        const loader = document.getElementById('loader');
-        loader.classList.remove('hidden');
-        
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            renderAnalysis();
-            showScreen('analysis');
-        }, 1200);
-    });
+    const startBtn = document.getElementById('start-analysis');
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            console.log("Start analysis clicked");
+            const loader = document.getElementById('loader');
+            if (loader) loader.classList.remove('hidden');
+            
+            setTimeout(() => {
+                if (loader) loader.classList.add('hidden');
+                renderAnalysis();
+                showScreen('analysis');
+            }, 1200);
+        });
+    }
 
     // Question Buttons
-    document.querySelectorAll('.q-btn').forEach(btn => {
+    document.querySelectorAll('.q-btn-card').forEach(btn => {
         btn.addEventListener('click', () => {
+            // Remove active style from all others
+            document.querySelectorAll('.q-btn-card').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
             const q = btn.dataset.q;
             renderAnswer(q);
         });
     });
 
     // Back Buttons
-    document.getElementById('to-brands').addEventListener('click', () => showScreen('brands'));
-    document.getElementById('to-setup').addEventListener('click', () => showScreen('setup'));
-    document.getElementById('restart').addEventListener('click', () => {
-        state.selectedBrand = null;
-        showScreen('brands');
-    });
+    const toBrands = document.getElementById('to-brands');
+    if (toBrands) toBrands.addEventListener('click', () => showScreen('brands'));
+
+    const toSetup = document.getElementById('to-setup');
+    if (toSetup) toSetup.addEventListener('click', () => showScreen('setup'));
+
+    const restartBtn = document.getElementById('restart');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', () => {
+            state.selectedBrand = null;
+            showScreen('brands');
+        });
+    }
 }
 
 // --- Start ---
