@@ -1,0 +1,81 @@
+{
+  "screens": {
+    "root": {
+      "brand": "BHC 치킨",
+      "title": "뭐가 궁금해?",
+      "subtitle": "핵심만 빠르게 파고드세요",
+      "breadcrumb": [],
+      "cards": [
+        {
+          "id": "start",
+          "value": "중상",
+          "label": "해볼 만할까?",
+          "desc": "초보 가능, 자금 부담 큼",
+          "color": "yellow",
+          "nextId": "risk_detail"
+        },
+        {
+          "id": "cost",
+          "value": "약 1.5억",
+          "label": "얼마 드나?",
+          "desc": "가맹비, 인테리어 포함",
+          "color": "red",
+          "nextId": "cost_detail"
+        },
+        {
+          "id": "profit",
+          "value": "약 280만",
+          "label": "얼마 남나?",
+          "desc": "월 매출 대비 순수익",
+          "color": "green",
+          "nextId": "profit_detail"
+        },
+        {
+          "id": "fail",
+          "value": "입지 1위",
+          "label": "어디서 망하나?",
+          "desc": "폐업 사유 압도적 1위",
+          "color": "red",
+          "nextId": "fail_detail"
+        }
+      ]
+    },
+    "profit_detail": {
+      "brand": "BHC 치킨",
+      "title": "얼마 남나?",
+      "breadcrumb": ["BHC", "얼마 남나"],
+      "cards": [
+        {
+          "id": "raw",
+          "value": "-456만",
+          "label": "재료비",
+          "desc": "매출 38% 고정 (줄이기 어려움)",
+          "color": "red"
+        },
+        {
+          "id": "labor",
+          "value": "-250만",
+          "label": "인건비",
+          "desc": "직원 1명만 있어도 수익 감소",
+          "color": "red"
+        },
+        {
+          "id": "rent",
+          "value": "-150만",
+          "label": "임대료",
+          "desc": "입지 잘못 잡으면 부담",
+          "color": "red"
+        },
+        {
+          "id": "net",
+          "value": "실제 순이익 약 280만",
+          "label": "순이익",
+          "desc": "생각보다 적은 구조",
+          "color": "green",
+          "question": "열심히 해도 월 280이 전부야?",
+          "nextId": "strategy"
+        }
+      ]
+    }
+  }
+}
